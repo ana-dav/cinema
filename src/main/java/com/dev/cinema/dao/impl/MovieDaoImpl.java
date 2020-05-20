@@ -1,12 +1,12 @@
 package com.dev.cinema.dao.impl;
 
-import java.util.List;
-import javax.persistence.criteria.CriteriaQuery;
 import com.dev.cinema.dao.MovieDao;
 import com.dev.cinema.exception.DataProcessException;
 import com.dev.cinema.lib.Dao;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.util.HibernateUtil;
+import java.util.List;
+import javax.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.jboss.logging.Logger;
