@@ -1,8 +1,5 @@
 package com.dev.cinema;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import com.dev.cinema.lib.Injector;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
@@ -10,10 +7,14 @@ import com.dev.cinema.model.MovieSession;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class App {
     private static final Injector INJECTOR = Injector.getInstance("com.dev.cinema");
-    private static MovieService movieService = (MovieService) INJECTOR.getInstance(MovieService.class);
+    private static MovieService movieService = (MovieService)
+            INJECTOR.getInstance(MovieService.class);
     private static CinemaHallService cinemaHallService = (CinemaHallService)
             INJECTOR.getInstance(CinemaHallService.class);
     private static MovieSessionService movieSessionService = (MovieSessionService)

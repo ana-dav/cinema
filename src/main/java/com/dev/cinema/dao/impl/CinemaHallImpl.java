@@ -1,13 +1,12 @@
 package com.dev.cinema.dao.impl;
 
-import java.sql.Connection;
-import java.util.List;
-import javax.persistence.criteria.CriteriaQuery;
 import com.dev.cinema.dao.CinemaHallDao;
 import com.dev.cinema.exception.DataProcessException;
 import com.dev.cinema.lib.Dao;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.util.HibernateUtil;
+import java.util.List;
+import javax.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -27,8 +26,8 @@ public class CinemaHallImpl implements CinemaHallDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessException
-                    ("There was an error inserting " + cinemaHall, e);
+            throw new DataProcessException("There was an error inserting "
+                    + cinemaHall, e);
         } finally {
             if (session != null) {
                 session.close();
