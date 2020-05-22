@@ -18,24 +18,24 @@ import org.hibernate.Transaction;
 @Dao
 public class MovieSessionDaoImpl implements MovieSessionDao {
     @Override
-    public MovieSession add(MovieSession session) {
-        Session sess = null;
+    public MovieSession add(MovieSession movieSession) {
+        Session session = null;
         Transaction transaction = null;
         try {
-            sess = HibernateUtil.getSessionFactory().openSession();
-            transaction = sess.beginTransaction();
-            sess.save(session);
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.save(movieSession);
             transaction.commit();
-            return session;
+            return movieSession;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
             throw new DataProcessException("There was an error inserting "
-                    + session, e);
+                    + movieSession, e);
         } finally {
-            if (sess != null) {
-                sess.close();
+            if (session != null) {
+                session.close();
             }
         }
     }
@@ -50,7 +50,7 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
             Predicate idPredicate
                     = criteriaBuilder.equal(root.get("movie"), movieId);
             Predicate datePredicate = criteriaBuilder.between(
-                    root.get("sessionTime"), date.atStartOfDay(), date.atTime(LocalTime.MAX));
+                    root.get("showTime"), date.atStartOfDay(), date.atTime(LocalTime.MAX));
             return session.createQuery(query.where(idPredicate, datePredicate)).getResultList();
         } catch (Exception e) {
             throw new DataProcessException(
