@@ -4,12 +4,15 @@ import com.dev.cinema.lib.Injector;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.MovieSession;
+import com.dev.cinema.model.User;
+import com.dev.cinema.security.AuthenticationService;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import javax.security.sasl.AuthenticationException;
 
 public class App {
     private static final Injector INJECTOR = Injector.getInstance("com.dev.cinema");
@@ -19,8 +22,10 @@ public class App {
             INJECTOR.getInstance(CinemaHallService.class);
     private static MovieSessionService movieSessionService = (MovieSessionService)
             INJECTOR.getInstance(MovieSessionService.class);
+    private static AuthenticationService authenticationService = (AuthenticationService)
+            INJECTOR.getInstance(AuthenticationService.class);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AuthenticationException {
         Movie movie = new Movie();
         movie.setTitle("Platform");
         movie.setDescription("The best netfix spanish thriller");
@@ -40,5 +45,12 @@ public class App {
         movieSessionService.add(movieSession);
         movieSessionService.findAvailableSessions(movie.getId(), LocalDate.now())
                 .forEach(System.out::println);
+
+        User user = new User();
+        user.setEmail("lok@gmail.com");
+        user.setPassword("1234");
+        user.setSalt("Here is some salt".getBytes());
+        authenticationService.register(user.getEmail(), "1234");
+        authenticationService.login("lok@gmail.com", "1234");
     }
 }
