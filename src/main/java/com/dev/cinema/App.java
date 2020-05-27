@@ -4,11 +4,13 @@ import com.dev.cinema.lib.Injector;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.MovieSession;
+import com.dev.cinema.model.ShoppingCart;
 import com.dev.cinema.model.User;
 import com.dev.cinema.security.AuthenticationService;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
+import com.dev.cinema.service.ShoppingCartService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -24,6 +26,8 @@ public class App {
             INJECTOR.getInstance(MovieSessionService.class);
     private static AuthenticationService authenticationService = (AuthenticationService)
             INJECTOR.getInstance(AuthenticationService.class);
+    private static ShoppingCartService shoppingCartService = (ShoppingCartService)
+            INJECTOR.getInstance(ShoppingCartService.class);
 
     public static void main(String[] args) throws AuthenticationException {
         Movie movie = new Movie();
@@ -41,6 +45,7 @@ public class App {
         MovieSession movieSession = new MovieSession();
         movieSession.setMovie(movie);
         movieSession.setShowTime(LocalDateTime.of(LocalDate.now(), LocalTime.of(19, 30)));
+        movieSession.setCinemaHall(cinemaHall);
 
         movieSessionService.add(movieSession);
         movieSessionService.findAvailableSessions(movie.getId(), LocalDate.now())
@@ -50,7 +55,10 @@ public class App {
         user.setEmail("lok@gmail.com");
         user.setPassword("1234");
         user.setSalt("Here is some salt".getBytes());
-        authenticationService.register(user.getEmail(), "1234");
+        User register = authenticationService.register(user.getEmail(), "1234");
         authenticationService.login("lok@gmail.com", "1234");
+
+        ShoppingCart shoppingCart = shoppingCartService.getByUser(register);
+        shoppingCartService.addSession(movieSession, register);
     }
 }
