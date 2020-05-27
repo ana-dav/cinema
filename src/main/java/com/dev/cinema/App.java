@@ -45,6 +45,7 @@ public class App {
         MovieSession movieSession = new MovieSession();
         movieSession.setMovie(movie);
         movieSession.setShowTime(LocalDateTime.of(LocalDate.now(), LocalTime.of(19, 30)));
+        movieSession.setCinemaHall(cinemaHall);
 
         movieSessionService.add(movieSession);
         movieSessionService.findAvailableSessions(movie.getId(), LocalDate.now())
@@ -54,10 +55,10 @@ public class App {
         user.setEmail("lok@gmail.com");
         user.setPassword("1234");
         user.setSalt("Here is some salt".getBytes());
-        authenticationService.register(user.getEmail(), "1234");
+        User register = authenticationService.register(user.getEmail(), "1234");
         authenticationService.login("lok@gmail.com", "1234");
 
-        ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
-        shoppingCartService.addSession(movieSession, user);
+        ShoppingCart shoppingCart = shoppingCartService.getByUser(register);
+        shoppingCartService.addSession(movieSession, register);
     }
 }

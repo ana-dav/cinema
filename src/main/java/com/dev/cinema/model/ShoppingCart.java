@@ -1,6 +1,5 @@
 package com.dev.cinema.model;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -21,7 +20,6 @@ public class ShoppingCart {
     private Long id;
     @OneToMany
     private List<Ticket> tickets;
-    private LocalDateTime orderDate;
     @OneToOne
     @MapsId
     @JoinColumn(name = "id")
@@ -46,14 +44,6 @@ public class ShoppingCart {
         this.tickets = tickets;
     }
 
-    public LocalDateTime getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(LocalDateTime orderDate) {
-        this.orderDate = orderDate;
-    }
-
     public User getUser() {
         return user;
     }
@@ -73,12 +63,11 @@ public class ShoppingCart {
         ShoppingCart that = (ShoppingCart) o;
         return Objects.equals(id, that.id)
                 && Objects.equals(tickets, that.tickets)
-                && Objects.equals(orderDate, that.orderDate)
                 && Objects.equals(user, that.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, tickets, orderDate, user);
+        return Objects.hash(id, tickets, user);
     }
 }
