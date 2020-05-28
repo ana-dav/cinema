@@ -1,6 +1,6 @@
 package com.dev.cinema.dao.impl;
 
-import com.dev.cinema.dao.ShoppingCartDao;
+import com.dev.cinema.dao.interfaces.ShoppingCartDao;
 import com.dev.cinema.exception.DataProcessException;
 import com.dev.cinema.lib.Dao;
 import com.dev.cinema.model.ShoppingCart;

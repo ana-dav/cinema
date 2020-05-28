@@ -18,6 +18,7 @@ public class MovieSession {
     private Movie movie;
     @ManyToOne
     private CinemaHall cinemaHall;
+
     private LocalDateTime showTime;
 
     public Long getId() {

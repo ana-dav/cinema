@@ -1,6 +1,6 @@
 package com.dev.cinema.dao.impl;
 
-import com.dev.cinema.dao.CinemaHallDao;
+import com.dev.cinema.dao.interfaces.CinemaHallDao;
 import com.dev.cinema.exception.DataProcessException;
 import com.dev.cinema.lib.Dao;
 import com.dev.cinema.model.CinemaHall;
@@ -38,6 +38,7 @@ public class CinemaHallImpl implements CinemaHallDao {
 
     @Override
     public List<CinemaHall> getAll() {
+        //todo
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             CriteriaQuery<CinemaHall> criteriaQuery
                     = session.getCriteriaBuilder().createQuery(CinemaHall.class);

@@ -1,4 +1,4 @@
-package com.dev.cinema.service;
+package com.dev.cinema.service.interfaces;
 
 import com.dev.cinema.lib.Service;
 import com.dev.cinema.model.Movie;
