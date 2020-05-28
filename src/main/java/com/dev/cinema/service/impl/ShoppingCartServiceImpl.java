@@ -1,7 +1,5 @@
 package com.dev.cinema.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.dev.cinema.dao.interfaces.ShoppingCartDao;
 import com.dev.cinema.dao.interfaces.TicketDao;
 import com.dev.cinema.lib.Inject;
