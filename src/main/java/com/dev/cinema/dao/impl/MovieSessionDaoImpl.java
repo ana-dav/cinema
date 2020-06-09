@@ -1,6 +1,6 @@
 package com.dev.cinema.dao.impl;
 
-import com.dev.cinema.dao.MovieSessionDao;
+import com.dev.cinema.dao.interfaces.MovieSessionDao;
 import com.dev.cinema.exception.DataProcessException;
 import com.dev.cinema.lib.Dao;
 import com.dev.cinema.model.MovieSession;
@@ -43,6 +43,7 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            // TODO: 5/27/20 change method to HQL
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<MovieSession> query
                     = criteriaBuilder.createQuery(MovieSession.class);

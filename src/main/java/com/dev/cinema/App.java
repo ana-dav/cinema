@@ -7,10 +7,11 @@ import com.dev.cinema.model.MovieSession;
 import com.dev.cinema.model.ShoppingCart;
 import com.dev.cinema.model.User;
 import com.dev.cinema.security.AuthenticationService;
-import com.dev.cinema.service.CinemaHallService;
-import com.dev.cinema.service.MovieService;
-import com.dev.cinema.service.MovieSessionService;
-import com.dev.cinema.service.ShoppingCartService;
+import com.dev.cinema.service.interfaces.CinemaHallService;
+import com.dev.cinema.service.interfaces.MovieService;
+import com.dev.cinema.service.interfaces.MovieSessionService;
+import com.dev.cinema.service.interfaces.OrderService;
+import com.dev.cinema.service.interfaces.ShoppingCartService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -28,6 +29,8 @@ public class App {
             INJECTOR.getInstance(AuthenticationService.class);
     private static ShoppingCartService shoppingCartService = (ShoppingCartService)
             INJECTOR.getInstance(ShoppingCartService.class);
+    private static OrderService orderService = (OrderService)
+            INJECTOR.getInstance(OrderService.class);
 
     public static void main(String[] args) throws AuthenticationException {
         Movie movie = new Movie();
@@ -55,10 +58,15 @@ public class App {
         user.setEmail("lok@gmail.com");
         user.setPassword("1234");
         user.setSalt("Here is some salt".getBytes());
-        User register = authenticationService.register(user.getEmail(), "1234");
+        User registeredUser = authenticationService.register(user.getEmail(), "1234");
         authenticationService.login("lok@gmail.com", "1234");
 
-        ShoppingCart shoppingCart = shoppingCartService.getByUser(register);
-        shoppingCartService.addSession(movieSession, register);
+        ShoppingCart shoppingCart = shoppingCartService.getByUser(registeredUser);
+        shoppingCartService.addSession(movieSession, registeredUser);
+        shoppingCartService.getByUser(user);
+        orderService.completeOrder(shoppingCart.getTickets(), user);
+
+        orderService.getOrderHistory(user);
+        shoppingCartService.clear(shoppingCart);
     }
 }
