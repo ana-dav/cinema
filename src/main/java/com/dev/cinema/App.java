@@ -58,15 +58,15 @@ public class App {
         user.setEmail("lok@gmail.com");
         user.setPassword("1234");
         user.setSalt("Here is some salt".getBytes());
-        User registeredUser = authenticationService.register(user.getEmail(), "1234");
+        User registeredUser = authenticationService.register("lok@gmail.com", "1234");
         authenticationService.login("lok@gmail.com", "1234");
 
         ShoppingCart shoppingCart = shoppingCartService.getByUser(registeredUser);
         shoppingCartService.addSession(movieSession, registeredUser);
-        shoppingCartService.getByUser(user);
-        orderService.completeOrder(shoppingCart.getTickets(), user);
+        shoppingCartService.getByUser(registeredUser);
+        orderService.completeOrder(shoppingCart.getTickets(), registeredUser);
 
-        orderService.getOrderHistory(user);
+        orderService.getOrderHistory(registeredUser);
         shoppingCartService.clear(shoppingCart);
     }
 }
