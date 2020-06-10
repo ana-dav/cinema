@@ -1,19 +1,19 @@
 package com.dev.cinema.security;
 
-import com.dev.cinema.lib.Inject;
-import com.dev.cinema.lib.Service;
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.interfaces.ShoppingCartService;
 import com.dev.cinema.service.interfaces.UserService;
 import com.dev.cinema.util.HashUtil;
 import java.util.Optional;
 import javax.security.sasl.AuthenticationException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
-    @Inject
+    @Autowired
     private UserService userService;
-    @Inject
+    @Autowired
     private ShoppingCartService shoppingCartService;
 
     @Override
@@ -33,7 +33,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setSalt(HashUtil.getSalt());
         user.setPassword(HashUtil.hashPassword(password, user.getSalt()));
         shoppingCartService.registerNewShoppingCart(userService.add(user));
-        //shoppingCartService.registerNewShoppingCart(user);
         return user;
     }
 }

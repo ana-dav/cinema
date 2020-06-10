@@ -1,8 +1,8 @@
 package com.dev.cinema.service.interfaces;
 
-import com.dev.cinema.lib.Service;
 import com.dev.cinema.model.Movie;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 @Service
 public interface MovieService {
