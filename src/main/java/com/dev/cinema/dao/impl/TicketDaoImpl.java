@@ -1,9 +1,13 @@
 package com.dev.cinema.dao.impl;
 
-import javax.persistence.criteria.*;
 import com.dev.cinema.dao.interfaces.TicketDao;
 import com.dev.cinema.exception.DataProcessException;
 import com.dev.cinema.model.Ticket;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

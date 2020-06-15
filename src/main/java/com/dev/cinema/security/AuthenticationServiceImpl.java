@@ -4,7 +4,6 @@ import com.dev.cinema.model.User;
 import com.dev.cinema.service.interfaces.ShoppingCartService;
 import com.dev.cinema.service.interfaces.UserService;
 import com.dev.cinema.util.HashUtil;
-import java.util.Optional;
 import javax.security.sasl.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
