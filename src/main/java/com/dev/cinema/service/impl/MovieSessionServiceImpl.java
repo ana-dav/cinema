@@ -1,16 +1,17 @@
 package com.dev.cinema.service.impl;
 
 import com.dev.cinema.dao.interfaces.MovieSessionDao;
-import com.dev.cinema.lib.Inject;
-import com.dev.cinema.lib.Service;
 import com.dev.cinema.model.MovieSession;
 import com.dev.cinema.service.interfaces.MovieSessionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class MovieSessionServiceImpl implements MovieSessionService {
-    @Inject
+
+    @Autowired
     private MovieSessionDao movieSessionDao;
 
     @Override
@@ -21,5 +22,10 @@ public class MovieSessionServiceImpl implements MovieSessionService {
     @Override
     public MovieSession add(MovieSession session) {
         return movieSessionDao.add(session);
+    }
+
+    @Override
+    public MovieSession getMovieSessionById(Long id) {
+        return movieSessionDao.getMovieSessionById(id);
     }
 }
