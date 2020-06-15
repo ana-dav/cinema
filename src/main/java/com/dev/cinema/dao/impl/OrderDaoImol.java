@@ -48,8 +48,8 @@ public class OrderDaoImol implements OrderDao {
         try (Session session = sessionFactory.openSession()) {
             Query<Order> query = session.createQuery(
                     "select distinct o from Order o "
-                    + "left join fetch o.tickets Ticket "
-                    + "where o.user =: user", Order.class);
+                            + "left join fetch o.tickets Ticket "
+                            + "where o.user =: user", Order.class);
             query.setParameter("user", user);
             return query.getResultList();
         } catch (Exception e) {

@@ -17,8 +17,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
         "com.dev.cinema.dao",
         "com.dev.cinema.service",
         "com.dev.cinema.security",
-        "com.dev.cinema.mappers",
-        "com.dev.cinema.util"
+        "com.dev.cinema.model"
 })
 public class AppConfig {
     @Autowired
@@ -46,4 +45,3 @@ public class AppConfig {
         return localSessionFactoryBean;
     }
 }
-

@@ -12,10 +12,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
-
     @Autowired
     private ShoppingCartDao shoppingCartDao;
-
     @Autowired
     private TicketDao ticketDao;
 
