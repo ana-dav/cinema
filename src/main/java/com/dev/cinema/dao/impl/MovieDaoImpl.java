@@ -49,7 +49,7 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public Movie getMovieById(Long id) {
+    public Movie getById(Long id) {
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<Movie> criteriaQuery = criteriaBuilder

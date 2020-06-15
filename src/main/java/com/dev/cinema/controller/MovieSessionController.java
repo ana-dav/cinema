@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/moviesessions")
+@RequestMapping("/movie-sessions")
 public class MovieSessionController {
     private final MovieSessionService movieSessionService;
     private final MovieSessionMapper movieSessionMapper;
@@ -33,7 +33,7 @@ public class MovieSessionController {
         movieSessionService.add(movieSessionMapper.dtoToMovieSession(movieSessionRequestDto));
     }
 
-    @GetMapping
+    @GetMapping("/available")
     public List<MovieSessionResponseDto> getAvailableSession(@RequestParam Long movieId,
                                                              @RequestParam
                                                              @DateTimeFormat(iso

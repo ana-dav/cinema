@@ -48,6 +48,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCart getCartById(Long id) {
-        return shoppingCartDao.getCartById(id);
+        return shoppingCartDao.getById(id);
     }
 }

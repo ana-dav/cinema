@@ -9,5 +9,5 @@ public interface OrderDao {
 
     List<Order> getOrderHistory(User user);
 
-    Order getOrderById(Long id);
+    Order getById(Long id);
 }

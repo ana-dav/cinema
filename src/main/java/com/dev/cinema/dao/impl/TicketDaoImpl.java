@@ -42,7 +42,7 @@ public class TicketDaoImpl implements TicketDao {
     }
 
     @Override
-    public Ticket getTicketById(Long id) {
+    public Ticket getById(Long id) {
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<Ticket> criteriaQuery = criteriaBuilder

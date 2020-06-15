@@ -79,7 +79,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     }
 
     @Override
-    public ShoppingCart getCartById(Long id) {
+    public ShoppingCart getById(Long id) {
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<ShoppingCart> criteriaQuery = criteriaBuilder

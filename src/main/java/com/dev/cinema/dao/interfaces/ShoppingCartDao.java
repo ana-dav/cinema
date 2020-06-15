@@ -10,5 +10,5 @@ public interface ShoppingCartDao {
 
     void update(ShoppingCart shoppingCart);
 
-    ShoppingCart getCartById(Long id);
+    ShoppingCart getById(Long id);
 }

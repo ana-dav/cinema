@@ -59,7 +59,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserById(Long id) {
+    public User getById(Long id) {
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<User> criteriaQuery = criteriaBuilder

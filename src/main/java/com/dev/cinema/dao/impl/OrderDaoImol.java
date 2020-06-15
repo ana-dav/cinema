@@ -58,7 +58,7 @@ public class OrderDaoImol implements OrderDao {
     }
 
     @Override
-    public Order getOrderById(Long id) {
+    public Order getById(Long id) {
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<Order> criteriaQuery = criteriaBuilder
