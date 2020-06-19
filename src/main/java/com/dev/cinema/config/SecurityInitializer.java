@@ -1,4 +1,7 @@
 package com.dev.cinema.config;
 
-public class SecurityInitializer {
+import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
+
+public class SecurityInitializer extends AbstractSecurityWebApplicationInitializer {
+    //
 }
