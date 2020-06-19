@@ -61,4 +61,21 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
                     "There was an error retrieving available sessions", e);
         }
     }
+
+    @Override
+    public MovieSession getById(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<MovieSession> criteriaQuery = criteriaBuilder
+                    .createQuery(MovieSession.class);
+            Root<MovieSession> sessionRoot = criteriaQuery.from(MovieSession.class);
+            Predicate predicate = criteriaBuilder
+                    .equal(sessionRoot.get("id"), id);
+            criteriaQuery.select(sessionRoot).where(predicate);
+            return session.createQuery(criteriaQuery).uniqueResult();
+        } catch (Exception e) {
+            throw new DataProcessException(
+                    "An Error Occurred While Retrieving Movie Session by Id! " + id, e);
+        }
+    }
 }

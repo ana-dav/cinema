@@ -4,7 +4,10 @@ import com.dev.cinema.dao.interfaces.CinemaHallDao;
 import com.dev.cinema.exception.DataProcessException;
 import com.dev.cinema.model.CinemaHall;
 import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -49,6 +52,23 @@ public class CinemaHallImpl implements CinemaHallDao {
             return session.createQuery(criteriaQuery).getResultList();
         } catch (Exception e) {
             throw new DataProcessException("There was an error retrieving all cinema halls", e);
+        }
+    }
+
+    @Override
+    public CinemaHall getById(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<CinemaHall> criteriaQuery = criteriaBuilder
+                    .createQuery(CinemaHall.class);
+            Root<CinemaHall> sessionRoot = criteriaQuery.from(CinemaHall.class);
+            Predicate predicate = criteriaBuilder
+                    .equal(sessionRoot.get("id"), id);
+            criteriaQuery.select(sessionRoot).where(predicate);
+            return session.createQuery(criteriaQuery).uniqueResult();
+        } catch (Exception e) {
+            throw new DataProcessException(
+                    "An Error Occurred While Retrieving Cinema Hall by Id! " + id, e);
         }
     }
 }

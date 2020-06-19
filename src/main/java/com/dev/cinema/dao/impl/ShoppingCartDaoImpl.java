@@ -4,6 +4,11 @@ import com.dev.cinema.dao.interfaces.ShoppingCartDao;
 import com.dev.cinema.exception.DataProcessException;
 import com.dev.cinema.model.ShoppingCart;
 import com.dev.cinema.model.User;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -70,6 +75,24 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
             if (session != null) {
                 session.close();
             }
+        }
+    }
+
+    @Override
+    public ShoppingCart getById(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<ShoppingCart> criteriaQuery = criteriaBuilder
+                    .createQuery(ShoppingCart.class);
+            Root<ShoppingCart> sessionRoot = criteriaQuery.from(ShoppingCart.class);
+            Predicate predicate = criteriaBuilder
+                    .equal(sessionRoot.get("id"), id);
+            sessionRoot.fetch("tickets", JoinType.LEFT);
+            criteriaQuery.select(sessionRoot).where(predicate);
+            return session.createQuery(criteriaQuery).getSingleResult();
+        } catch (Exception e) {
+            throw new DataProcessException(
+                    "An Error Occurred While Retrieving Cart by Id! " + id, e);
         }
     }
 }
