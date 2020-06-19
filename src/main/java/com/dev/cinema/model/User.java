@@ -1,12 +1,8 @@
 package com.dev.cinema.model;
 
 import java.util.Arrays;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.Set;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
@@ -17,15 +13,23 @@ public class User {
     @Column(name = "email", unique = true)
     private String email;
     private String password;
-    private byte[] salt;
+    @ManyToMany
+    private Set<Role> roles;
 
     public User() {
     }
 
-    public User(Long id, String email, String password) {
+    public User(String email, String password, Set<Role> roles) {
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
+
+    public User(Long id, String email, String password, Set<Role> roles) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -52,12 +56,12 @@ public class User {
         this.password = password;
     }
 
-    public byte[] getSalt() {
-        return salt;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setSalt(byte[] salt) {
-        this.salt = salt;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
@@ -66,7 +70,7 @@ public class User {
                 + "id=" + id
                 + ", email='" + email + '\''
                 + ", password='" + password + '\''
-                + ", salt=" + Arrays.toString(salt)
+                + ", roles=" + roles
                 + '}';
     }
 }
