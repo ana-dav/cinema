@@ -1,11 +1,11 @@
 package com.dev.cinema.security;
 
-import java.util.Set;
 import com.dev.cinema.model.Role;
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.interfaces.RoleService;
 import com.dev.cinema.service.interfaces.ShoppingCartService;
 import com.dev.cinema.service.interfaces.UserService;
+import java.util.Set;
 import javax.security.sasl.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

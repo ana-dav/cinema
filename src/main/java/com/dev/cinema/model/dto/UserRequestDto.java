@@ -1,8 +1,8 @@
 package com.dev.cinema.model.dto;
 
+import com.dev.cinema.annotation.EmailConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import com.dev.cinema.annotation.EmailConstraint;
 
 public class UserRequestDto {
     @EmailConstraint
